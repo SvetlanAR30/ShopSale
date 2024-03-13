@@ -2,6 +2,9 @@
     width: 30%;
     margin-bottom: 50px;
     overflow: hidden;
+    position: relative;
+    padding-bottom: 20px;
+    background: rgb(137, 192, 238);
 
     img{
         width: 100%;
@@ -11,6 +14,28 @@
     
     img:hover{
         transform: scale(1.05);
+    }
+
+    .addToCart{
+        position: absolute;
+        background: rgb(190, 56, 56);
+        right: 20px;
+        bottom: 20px;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        color: seashell;
+        font-size: 20px;
+        transition: transform 1000ms ease;
+    }
+
+    .addToCart:hover{
+        transform: scale(1.5) translateY(5px) ;
+
     }
 
 }
