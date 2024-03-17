@@ -94,15 +94,20 @@ export default function App() {
 
   const[orders,setOrders]=useState([]);
 
+  const deleteOrder=(id)=>{
+    setOrders(orders.filter((el)=>el.id!==id));
+  }
+
   const addToOrder=(item)=>{
     if(! orders.some((el)=>el.id===item.id)){
       setOrders([...orders,item]);
     }
+    //setOrders([...orders,item]); Чтобы добавлялись несколько товаров одной модели
   }
 
   return (
     <div className="wrapper">
-      <Header orders={orders}/>
+      <Header orders={orders} onDelete={deleteOrder}/>
       <Items allItems={items} onAdd={addToOrder}/>
       <Footer/>
     </div>
