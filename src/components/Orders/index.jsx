@@ -9,7 +9,7 @@ export default function Orders(props){
             <img src={"./images/"+props.item.img} alt="Error" />
             <h2>{props.item.title}</h2>
             <b>{props.item.price}$</b>
-            <TiDeleteOutline onClick={()=>props.onDelete(props.item.id)} className={styles.deleteIcon}/>
-        </div>
+            <TiDeleteOutline onClick={()=>props.onDelete(props.item.id)} className={styles.deleteIcon}/>        
+            </div>
     );
 }

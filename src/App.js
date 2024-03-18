@@ -1,15 +1,19 @@
 import React from "react";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import Header from "./components/Header";
 import Items from "./components/Items";
 import Footer from "./components/Footer";
 import "./index.scss";
+import Categories from "./components/Categories";
+import ShowFullItem from "./components/ShowFullItem";
+
 
 
 
 export default function App() {
 
   const[items,setItems]=useState([
+
     {
     id:1,
     title:'Iphone 14pro',
@@ -92,7 +96,17 @@ export default function App() {
   },
   ]);
 
-  const[orders,setOrders]=useState([]);
+
+  //переменные
+  const [orders,setOrders]=useState([]);
+  const [currentItems,setCurrenItems]=useState([]);
+  const [showFullItem,setShowFullItem]=useState(false);
+  const [fullItem,setFullItem]=useState({});
+
+  useEffect(()=>{
+    setCurrenItems(items);
+  },[items]);
+
 
   const deleteOrder=(id)=>{
     setOrders(orders.filter((el)=>el.id!==id));
@@ -105,10 +119,26 @@ export default function App() {
     //setOrders([...orders,item]); Чтобы добавлялись несколько товаров одной модели
   }
 
+  const chooseCategory =(category)=>{
+    if(category==="all"){
+      setCurrenItems(items);//передаем все товары
+    }
+    else{
+      setCurrenItems(items.filter((el)=>el.category===category));
+    }
+  }
+
+  const onShowItem=(item) =>{
+    setFullItem(item);
+    setShowFullItem(!showFullItem);
+  }
+
   return (
     <div className="wrapper">
       <Header orders={orders} onDelete={deleteOrder}/>
-      <Items allItems={items} onAdd={addToOrder}/>
+      <Categories chooseCategory={chooseCategory}/>
+      <Items allItems={currentItems} onShowItem={onShowItem} onAdd={addToOrder}/>
+      {showFullItem && <ShowFullItem onShowItem={onShowItem} onAdd={addToOrder} item={fullItem}/>}
       <Footer/>
     </div>
   );
