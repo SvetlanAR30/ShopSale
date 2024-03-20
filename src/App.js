@@ -1,5 +1,5 @@
 import React from "react";
-import {useState,useEffect} from "react";
+import {useState,useEffect,createContext,useContext} from "react";
 import Header from "./components/Header";
 import Items from "./components/Items";
 import Footer from "./components/Footer";
@@ -8,6 +8,7 @@ import Categories from "./components/Categories";
 import ShowFullItem from "./components/ShowFullItem";
 
 
+const AppContext = createContext(); //переменная для useContext
 
 
 export default function App() {
@@ -98,49 +99,70 @@ export default function App() {
 
 
   //переменные
-  const [orders,setOrders]=useState([]);
-  const [currentItems,setCurrenItems]=useState([]);
-  const [showFullItem,setShowFullItem]=useState(false);
-  const [fullItem,setFullItem]=useState({});
+  const [orders,setOrders]=useState([]); //переменная(orders),и перезапись переменной(setOrders)
+  const [currentItems,setCurrenItems]=useState([]); //Аналогично.Это категория
+  const [showFullItem,setShowFullItem]=useState(false); //Аналогично.Проверка для открытия карточки
+  const [fullItem,setFullItem]=useState({}); //Аналогично. Полный список
 
   useEffect(()=>{
     setCurrenItems(items);
   },[items]);
 
 
-  const deleteOrder=(id)=>{
-    setOrders(orders.filter((el)=>el.id!==id));
+  const deleteOrder=(id)=>{ //Передаем один элемент.Поиск по id
+    setOrders(orders.filter((el)=>el.id!==id)); //Фильтрация
   }
 
-  const addToOrder=(item)=>{
+  const addToOrder=(item)=>{  //Передаем все элементы из item
     if(! orders.some((el)=>el.id===item.id)){
       setOrders([...orders,item]);
     }
-    //setOrders([...orders,item]); Чтобы добавлялись несколько товаров одной модели
+    //setOrders([...orders,item]); Чтобы добавлялись в корзину несколько товаров одной модели
   }
 
   const chooseCategory =(category)=>{
     if(category==="all"){
-      setCurrenItems(items);//передаем все товары
+      setCurrenItems(items); //передаем все товары
     }
     else{
-      setCurrenItems(items.filter((el)=>el.category===category));
+      setCurrenItems(items.filter((el)=>el.category===category)); //Фильтрация всех товаров,чтобы открывались только из одной категории
     }
   }
 
-  const onShowItem=(item) =>{
+  const onShowItem=(item) =>{//Отображение увеличенной картинки(при нажатии)
     setFullItem(item);
     setShowFullItem(!showFullItem);
   }
 
   return (
+    <AppContext.Provider
+    value ={
+      {
+        items,
+        setItems,
+        orders,
+        setOrders,
+        currentItems,
+        setCurrenItems,
+        showFullItem,
+        setShowFullItem,
+        fullItem,
+        setFullItem,
+        deleteOrder,
+        addToOrder,
+        chooseCategory,
+        onShowItem,
+      }
+    }
+    > 
     <div className="wrapper">
-      <Header orders={orders} onDelete={deleteOrder}/>
-      <Categories chooseCategory={chooseCategory}/>
-      <Items allItems={currentItems} onShowItem={onShowItem} onAdd={addToOrder}/>
-      {showFullItem && <ShowFullItem onShowItem={onShowItem} onAdd={addToOrder} item={fullItem}/>}
+      <Header/>
+      <Categories/>
+      <Items/>
+      {showFullItem && <ShowFullItem />}
       <Footer/>
     </div>
+    </AppContext.Provider>
   );
 }
 

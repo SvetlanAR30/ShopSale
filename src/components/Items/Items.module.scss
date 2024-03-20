@@ -1,4 +1,4 @@
-main{
+main{ //Для блока не открывающегося (картинка+текст+кнопка+цена)
     display: flex;
     width: 100%;
     flex-wrap: wrap;
@@ -14,7 +14,7 @@ main{
     }
 
     b{
-        color: rgb(190, 56, 56);
+        color: rgb(255, 0, 0);
         font-size: 25px;
     }
 }

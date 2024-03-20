@@ -1,4 +1,4 @@
-.fullItem{
+.fullItem{ //Увеличенная картинка при нажатии
     position: fixed;
     top: 0;
     left: 0;
@@ -18,7 +18,7 @@
         color: rgb(255, 0, 0);
     }
 
-    .addToCart{
+    .addToCart{  //Кнопка плюс на увеличенной картинке
         position: absolute;
         right: 10px;
         bottom: 5px;
@@ -26,7 +26,7 @@
         width: 3px;
         height: 3px;
        
-        background-color: seashell;
+        background-color: rgb(255, 0, 0);
 
 
         &:hover{

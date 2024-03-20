@@ -1,4 +1,4 @@
-.item{
+.item{ //Все для корзины
     width: 100%;
     float: left;
     margin-bottom: 10px;
@@ -18,7 +18,7 @@
         font-weight: 600px;
     }
 
-    .deleteIcon{
+    .deleteIcon{ //Крестик в корзине,для удаления товара из корзины
         color: darkred;
         float: right;
         position: relative;
@@ -28,7 +28,7 @@
         transition: color,transform 1000ms ease;
 
         &:hover{
-            color:rgb(126, 58, 58);
+            color:darkred;
             transform: scale(1.5);
         }
     }

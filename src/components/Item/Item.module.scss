@@ -1,4 +1,4 @@
-.item{
+.item{ //Стили для всего экрана
     width: 30%;
     margin-bottom: 50px;
     overflow: hidden;
@@ -17,9 +17,9 @@
         transform: scale(1.05);
     }
 
-    .addToCart{
+    .addToCart{  //Кнопка на неоткрывающемся блоке
         position: absolute;
-        background: rgb(190, 56, 56);
+        background: rgb(255, 0, 0);
         right: 20px;
         bottom: 20px;
         width: 35px;
