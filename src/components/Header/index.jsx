@@ -2,30 +2,35 @@ import React, {useState} from "react"
 import { BsBasket2Fill } from "react-icons/bs";
 import styles from "./Header.module.scss"
 import Orders from "../Orders";
+import {useAppContext} from "./../../useAppContext";
 
-const showOrders=(props)=>{
-    let summa=0;
-    props.orders.forEach(el=>summa+=Number.parseFloat(el.price));
-    return(
-        <div>
-            {props.orders.map(el=>(
-                        <Orders onDelete={props.onDelete} key ={el.id}item={el}/>
-                    ))}
-                    <p className={styles.summa}>Итого:{new Intl.NumberFormat().format(summa)} $</p>
-        </div>
-    );
-}
 
-const showNothing=()=>{
-    return(
-        <div className={styles.empty}>
-            <h2>Товары отсутствуют</h2>
-        </div>
-    );
-}
 
-export default function Header(props){
+export default function Header(){
+    const {orders,deleteOrder} =useAppContext();//Вызов функций orders,deleteOrder
+
     let [cartOpen,setCartOpen]=useState(false);
+
+    const showOrders=()=>{
+        let summa=0;
+        orders.forEach(el=>summa+=Number.parseFloat(el.price));
+        return(
+            <div>
+                {orders.map(el=>(
+                            <Orders onDelete={deleteOrder} key ={el.id}item={el}/>
+                        ))}
+                        <p className={styles.summa}>Итого:{new Intl.NumberFormat().format(summa)} $</p>
+            </div>
+        );
+    }
+    
+    const showNothing=()=>{
+        return(
+            <div className={styles.empty}>
+                <h2>Товары отсутствуют</h2>
+            </div>
+        );
+    }
 
     return(
         <header>
@@ -42,8 +47,8 @@ export default function Header(props){
 
                 <div className={styles.shopCart}>
 
-                    {props.orders.length>0?
-                    showOrders(props):showNothing()
+                    {orders.length>0?
+                    showOrders():showNothing()
                     }
                     
                 </div>

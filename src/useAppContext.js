@@ -1,7 +1,9 @@
 import React, {useState,useEffect,useContext} from "react";
-const AppContext= React.createContext();
 
-export const useAppContext =() =>{
+const AppContext= React.createContext(); //Переменная AppContext
+
+export const useAppContext =() =>{ //Метод useAppContext-это вместо props
+  
     const context= useContext(AppContext);
 
     if(!context){
@@ -10,7 +12,7 @@ export const useAppContext =() =>{
     return context;
 }
 
-export const AppProvider =({children}) =>{
+   const AppProvider =({children}) =>{ //Что будет передаваться,через AppProvider.children-это переменная
     const[items,setItems]=useState([
 
         {
@@ -104,7 +106,7 @@ export const AppProvider =({children}) =>{
 
 
 
-useEffect(()=>{
+useEffect(()=>{ //Метод useEffect
     setCurrenItems(items);
   },[items]);
 
@@ -134,7 +136,7 @@ useEffect(()=>{
     setShowFullItem(!showFullItem);
 }
 
-    const contextValue={
+    const contextValue={ //Переменная contexValue
         items,
         setItems,
         orders,
@@ -153,4 +155,6 @@ useEffect(()=>{
 
     return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
   
-}
+};
+
+export default AppProvider;
