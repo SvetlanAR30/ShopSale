@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./Item.module.scss"
-import {useAppContext} from "./../../useAppContext";
+import { useAppContext } from "./../../useAppContext.tsx";
 
-export default function Item({item}){
+interface Props{ //Интерфейс typescript
+    item:any;
+}
+
+const Item:React.FC<Props>=({item})=>{ //Вызов интерфейса Props
 
     const {onShowItem, addToOrder} =useAppContext(); //Вызов функций onShowItem,onAdd
 
@@ -16,3 +20,4 @@ export default function Item({item}){
         </div>
     );
 }
+export default Item;

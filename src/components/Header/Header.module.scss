@@ -41,7 +41,7 @@ header{
      }
     }
 
-    .shopCartButton{ //Корзина значок
+    .shopCartButton{  //Корзина значок
         float: right;
         cursor: pointer;
         font-size: 20px;
@@ -54,7 +54,7 @@ header{
         
     }
 }
-    .shopCart{
+    .shopCart{  //Сама корзина,которая открывается (прямоугольник)
         position: absolute;
         top: 30px;
         right: 0;
@@ -71,7 +71,7 @@ header{
 
     }
 
-    .presentation{
+    .presentation{  //Для баннера
         margin: 50px 0;
         background: url(./../../img/banner.jpeg) no-repeat;
         width: 100%;

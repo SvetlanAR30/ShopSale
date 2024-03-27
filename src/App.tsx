@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect, createContext, useContext } from "react";
-import Header from "./components/Header";
-import Items from "./components/Items";
-import Footer from "./components/Footer";
+import Header from "./components/Header/index.tsx";
+import Items from "./components/Items/index.tsx";
+import Footer from "./components/Footer/index.tsx";
 import "./index.scss";
-import Categories from "./components/Categories";
-import ShowFullItem from "./components/ShowFullItem";
-import { useAppContext } from "./useAppContext";
+import Categories from "./components/Categories/index.tsx";
+import ShowFullItem from "./components/ShowFullItem/index.tsx";
+import { useAppContext } from "./useAppContext.tsx";
 
-export default function App() {
+export default function App():JSX.Element {
     const { showFullItem } = useAppContext();
     return (
         <div className="wrapper">
@@ -21,7 +21,7 @@ export default function App() {
     );
 }
 
-//Это первоночальный код
+//Это первоночальный код (без UseAppContext).Выше код с методом UseAppContext
 
 /*import React from "react";
 import {useState,useEffect,createContext,useContext} from "react";

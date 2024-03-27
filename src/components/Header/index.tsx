@@ -1,15 +1,15 @@
 import React, {useState} from "react"
 import { BsBasket2Fill } from "react-icons/bs";
 import styles from "./Header.module.scss"
-import Orders from "../Orders";
-import {useAppContext} from "./../../useAppContext";
+import Orders from "../Orders/index.tsx"
+import { useAppContext } from "./../../useAppContext.tsx";
 
 
 
-export default function Header(){
-    const {orders,deleteOrder} =useAppContext();//Вызов функций orders,deleteOrder
+const Header:React.FC=()=>{
+    const {orders} =useAppContext();//Вызов функций orders,deleteOrder
 
-    let [cartOpen,setCartOpen]=useState(false);
+    let [cartOpen,setCartOpen]=useState<boolean>(false);
 
     const showOrders=()=>{
         let summa=0;
@@ -17,7 +17,7 @@ export default function Header(){
         return(
             <div>
                 {orders.map(el=>(
-                            <Orders onDelete={deleteOrder} key ={el.id}item={el}/>
+                            <Orders key ={el.id}item={el}/>
                         ))}
                         <p className={styles.summa}>Итого:{new Intl.NumberFormat().format(summa)} $</p>
             </div>
@@ -41,7 +41,7 @@ export default function Header(){
                 <li>Контакты</li>
                 <li>Личный кабинет</li>
             </ul>
-            <BsBasket2Fill onClick={()=>setCartOpen(cartOpen= ! cartOpen)} className={`${styles.shopCartButton} ${cartOpen ? styles.active : ''}`}/>
+            <BsBasket2Fill onClick={()=>setCartOpen((prevCartOpen)=>!prevCartOpen)} className={`${styles.shopCartButton} ${cartOpen ? styles.active : ''}`}/>
 
             {cartOpen &&(
 
@@ -59,3 +59,4 @@ export default function Header(){
         </header>
     );
 }
+export default Header;

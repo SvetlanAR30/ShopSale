@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useContext} from "react";
 
-const AppContext= React.createContext(); //Переменная AppContext
+const AppContext= React.createContext <any>(null); //Переменная AppContext
 
 export const useAppContext =() =>{ //Метод useAppContext-это вместо props
   
@@ -12,8 +12,8 @@ export const useAppContext =() =>{ //Метод useAppContext-это вмест�
     return context;
 }
 
-   const AppProvider =({children}) =>{ //Что будет передаваться,через AppProvider.children-это переменная
-    const[items,setItems]=useState([
+   const AppProvider:React.FC<{children:React.ReactNode}> =({children}) =>{ //Что будет передаваться,через AppProvider.children-это переменная
+    const[items,setItems]=useState<any[]>([
 
         {
         id:1,
@@ -99,10 +99,10 @@ export const useAppContext =() =>{ //Метод useAppContext-это вмест�
     
     
       //переменные
-      const [orders,setOrders]=useState([]); //переменная(orders),и перезапись переменной(setOrders)
-      const [currentItems,setCurrenItems]=useState([]); //Аналогично.Это категория
-      const [showFullItem,setShowFullItem]=useState(false); //Аналогично.Проверка для открытия карточки
-      const [fullItem,setFullItem]=useState({}); //Аналогично. Полный список
+      const [orders,setOrders]=useState<any[]>([]); //переменная(orders),и перезапись переменной(setOrders).Передаются много товаров.Здесь тип any
+      const [currentItems,setCurrenItems]=useState<any[]>([]); //Аналогично.Это категория.Передаются много товаров.Здесь тип any
+      const [showFullItem,setShowFullItem]=useState<boolean>(false); //Аналогично.Проверка для открытия карточки.Здесь тип boolean
+      const [fullItem,setFullItem]=useState<any>({}); //Аналогично. Полный список.Передается один товар,поэтому any, без скобок[].Здесь тип any
 
 
 
@@ -111,18 +111,18 @@ useEffect(()=>{ //Метод useEffect
   },[items]);
 
 
-  const deleteOrder=(id)=>{ //Передаем один элемент.Поиск по id
+  const deleteOrder=(id:number)=>{ //Передаем один элемент.Поиск по id.Здесь тип number
     setOrders(orders.filter((el)=>el.id!==id)); //Фильтрация
   }
 
-  const addToOrder=(item)=>{  //Передаем все элементы из item
+  const addToOrder=(item:any)=>{  //Передаем все элементы из item
     if(! orders.some((el)=>el.id===item.id)){
       setOrders([...orders,item]);
     }
     //setOrders([...orders,item]); Чтобы добавлялись в корзину несколько товаров одной модели
   }
 
-  const chooseCategory =(category)=>{
+  const chooseCategory =(category:string)=>{//Здесь тип string
     if(category==="all"){
       setCurrenItems(items); //передаем все товары
     }
@@ -131,7 +131,7 @@ useEffect(()=>{ //Метод useEffect
     }
   }
 
-  const onShowItem=(item) =>{//Отображение увеличенной картинки(при нажатии)
+  const onShowItem=(item:any) =>{//Отображение увеличенной картинки(при нажатии)
     setFullItem(item);
     setShowFullItem(!showFullItem);
 }
